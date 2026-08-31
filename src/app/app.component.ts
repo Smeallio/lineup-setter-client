@@ -8,7 +8,7 @@ import { Player } from './models/players';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'lineup-setter';
 
   players = signal<Player[]>(
