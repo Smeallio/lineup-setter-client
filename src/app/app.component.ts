@@ -1,24 +1,14 @@
-import { Component, OnInit, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { Player } from './models/players';
+import { Component, signal } from "@angular/core";
+import { RouterOutlet } from "@angular/router";
+import { Player } from "./models/player.interface";
 
 @Component({
-  selector: 'app-root',
+  selector: "app-root",
   imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  templateUrl: "./app.component.html",
+  styleUrl: "./app.component.scss",
 })
-export class AppComponent implements OnInit {
-  title = 'lineup-setter';
+export class AppComponent {
+  title = "lineup-setter";
 
-  players = signal<Player[]>(
-    ['Stevie', 'John', 'Paul', 'George'].map((name, index) => ({
-      id: index + 1,
-      name,
-    }))
-  );
-
-  ngOnInit() {
-    console.log(this.players());
-  }
 }

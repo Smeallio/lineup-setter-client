@@ -1,4 +1,6 @@
 export interface Player {
-    id: number;
+    id: string;
     name: string;
+    manager_id: string;
 }
+
