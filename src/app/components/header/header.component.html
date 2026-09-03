@@ -1,0 +1,7 @@
+<header class="app-header">
+    @if (authService.isLoggedIn()) {
+        <button (click)="onLogoutClick()" class="app-header__button">Logout</button>
+    } @else {
+        <button (click)="onLoginClick()" class="app-header__button">Login</button>
+    }
+</header>
