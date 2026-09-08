@@ -1,11 +1,11 @@
 import { Component, signal } from "@angular/core";
 import { AuthService } from "../../services/auth.service";
-//import { LoginDialogComponent } from "../login/login.component";
+import { LoginDialogComponent } from "../login/login.component";
 
 @Component({
     selector: "app-header",
     standalone: true,
-    imports: [],
+    imports: [LoginDialogComponent],
     templateUrl: "./header.component.html",
     styleUrl: "./header.component.scss",
   })
@@ -16,6 +16,10 @@ import { AuthService } from "../../services/auth.service";
 
     onLoginClick(): void {
         this.showLoginDialog.set(true);
+    }
+
+    onDialogClosed(): void {
+        this.showLoginDialog.set(false);
     }
 
     onLogoutClick(): void {
