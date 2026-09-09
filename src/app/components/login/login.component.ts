@@ -12,14 +12,18 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './login.component.html',
+  styleUrl: './login.component.scss',
 })
 export class LoginDialogComponent {
   loginForm = new FormGroup({
-    username: new FormControl('', [Validators.required, Validators.email]),
+    username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
   });
 
+  errorMessage: string | null = null;
+
   @Output() loginSuccess = new EventEmitter<void>();
+  @Output() closeLogin = new EventEmitter<void>();
 
   constructor(private authService: AuthService) {}
 
@@ -31,9 +35,14 @@ export class LoginDialogComponent {
           this.loginSuccess.emit();
         },
         error: (err) => {
-          console.error('Login failed', err);
+          this.errorMessage = err.error?.message || 'Login failed. Please try again.';
         },
       });
     }
   }
+
+  onClose(): void {
+    this.closeLogin.emit();
+  }
+
 }

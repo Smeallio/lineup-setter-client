@@ -1,28 +1,39 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <h2>Login</h2>
-  <div>
-    <label for="username">Username:</label>
-    <input id="username" formControlName="username" />
-    <div
-      *ngIf="
-        loginForm.get('username').invalid && loginForm.get('username').touched
-      "
-    >
-      Username is required.
+<div class="login-dialog__backdrop" (click)="onClose()">
+  <div class="login-dialog__modal" (click)="$event.stopPropagation()">
+    <div class="login-dialog__modal-header">
+      <h2 class="login-dialog__modal-title">Login</h2>
+      <button
+        class="login-dialog__modal-close-btn"
+        (click)="onClose()"
+        aria-label="Close"
+      >
+        &times;
+      </button>
     </div>
-  </div>
 
-  <div>
-    <label for="password">Password:</label>
-    <input id="password" type="password" formControlName="password" />
-    <div
-      *ngIf="
-        loginForm.get('password').invalid && loginForm.get('password').touched
-      "
-    >
-      Password is required.
-    </div>
-  </div>
+    @if (errorMessage) {
+    <p>{{ errorMessage }}</p>
+    }
+    <form class="login-dialog__form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="login-dialog__form-user" >
+        <label for="username">Username:</label>
+        <input id="username" formControlName="username" />
+        @if (loginForm.get('username')?.invalid &&
+        loginForm.get('username')?.touched) {
+        <div>Username is required.</div>
+        }
+      </div>
 
-  <button type="submit" [disabled]="loginForm.invalid">Login</button>
-</form>
+      <div class="login-dialog__form-password" >
+        <label for="password">Password:</label>
+        <input id="password" type="password" formControlName="password" />
+        @if (loginForm.get('password')?.invalid &&
+        loginForm.get('password')?.touched) {
+        <div>Password is required.</div>
+        }
+      </div>
+
+      <button class="login-dialog__form-btn"  type="submit" [disabled]="loginForm.invalid">Login</button>
+    </form>
+  </div>
+</div>

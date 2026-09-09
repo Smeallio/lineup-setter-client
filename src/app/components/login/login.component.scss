@@ -1,0 +1,44 @@
+.login-dialog {
+  &__backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+  }
+
+  &__modal {
+    position: relative;
+    background-color: white;
+    border-radius: 0.5rem;
+    width: 400px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+
+    &-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1rem;
+      margin-bottom: 1rem;
+    }
+
+    &-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    &-close-btn {
+      cursor: pointer;
+    }
+  }
+
+  &__form {
+    padding: 0 2rem;
+
+    &-user, &-password, &-btn {
+        margin: 1rem 0;
+    }
+  }
+}
