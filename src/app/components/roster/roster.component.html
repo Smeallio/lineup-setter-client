@@ -1,8 +1,33 @@
 <h3>Roster:</h3>
-<!-- <ol>
-  @for (player of players(); track player.id) {
+<ol>
+  @for (player of playerService.players(); track player.id) {
   <div class="member">
-    <li>{{ player.name }}</li>
+    <li><span>{{ player.name }}</span>
+      <button
+      class="playerList__delete-btn"
+      (click)="onDeletePlayer(player.id)"
+      aria-label="Close"
+    >
+      &times;
+    </button>
+    </li>
   </div>
   }
-</ol> -->
+</ol>
+<form
+  class="addPlayer__form"
+  [formGroup]="newPlayerForm"
+  (ngSubmit)="onSubmit()"
+>
+  <div class="addPlayer__form-name">
+    <label for="playerName">Name:</label>
+    <input id="playerName" formControlName="playerName" />
+    @if (newPlayerForm.get('name')?.invalid &&
+    newPlayerForm.get('name')?.touched) {
+    <div>Player name is required.</div>
+    }
+  </div>
+
+  <button class="addPlayer__form-btn"  type="submit" [disabled]="newPlayerForm.invalid">Add Player</button>
+</form>
+
