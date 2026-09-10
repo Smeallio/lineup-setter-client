@@ -2,22 +2,24 @@
 <ol>
   @for (player of playerService.players(); track player.id) {
   <div class="member">
-    <li><span>{{ player.name }}</span>
+    <li>
+      <span>{{ player.name }}</span>
       <button
-      class="playerList__delete-btn"
-      (click)="onDeletePlayer(player.id)"
-      aria-label="Close"
-    >
-      &times;
-    </button>
+        class="playerList__delete-btn"
+        (click)="onDeletePlayer(player.id)"
+        aria-label="Close"
+      >
+        &times;
+      </button>
     </li>
   </div>
   }
 </ol>
+@if (showAddPlayer()) {
 <form
   class="addPlayer__form"
   [formGroup]="newPlayerForm"
-  (ngSubmit)="onSubmit()"
+  (ngSubmit)="onAddPlayer()"
 >
   <div class="addPlayer__form-name">
     <label for="playerName">Name:</label>
@@ -28,6 +30,20 @@
     }
   </div>
 
-  <button class="addPlayer__form-btn"  type="submit" [disabled]="newPlayerForm.invalid">Add Player</button>
+  <button
+    class="addPlayer__form-btn"
+    type="submit"
+    [disabled]="newPlayerForm.invalid"
+  >
+    Add Player
+  </button>
+  <button class="addPlayer__form-btn" (click)="toggleAddPlayerForm()">Cancel</button>
 </form>
-
+} @else {
+  <button
+  class="addPlayer__form-btn"
+  (click)="toggleAddPlayerForm()"
+>
+  Add Player
+</button>
+}

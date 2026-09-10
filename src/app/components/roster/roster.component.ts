@@ -1,10 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  OnInit,
-  Output,
-  WritableSignal,
-} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -27,11 +21,17 @@ export class RosterComponent implements OnInit {
     this.playerService.fetchPlayers().subscribe();
   }
 
+  showAddPlayer = signal(false);
+
+  toggleAddPlayerForm(): void {
+    this.showAddPlayer.set(!this.showAddPlayer());
+  }
+
   newPlayerForm = new FormGroup({
     playerName: new FormControl('', Validators.required),
   });
 
-  onSubmit(): void {
+  onAddPlayer(): void {
     if (this.newPlayerForm.valid) {
       const { playerName } = this.newPlayerForm.value;
       this.playerService.addPlayer({ name: playerName! }).subscribe({
