@@ -7,6 +7,6 @@
     padding: 1rem 0;
 
     &__button {
-        @include button;
+        @include green-button;
     }
 }

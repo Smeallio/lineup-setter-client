@@ -1,26 +1,70 @@
-@mixin button {
-  background-color: #fbeee0;
-  border: 2px solid #422800;
-  border-radius: 30px;
-  box-shadow: #422800 4px 4px 0 0;
-  color: #422800;
+// @mixin green-button {
+//   font-family: "Rubik", sans-serif;
+//   font-size: 1.25rem;
+//   font-weight: bold;
+//   text-transform: uppercase;
+//   padding: 0.5rem 1rem;
+//   background: #4caf50;
+//   color: #ffffff;
+//   border: none;
+//   border-radius: 0.25rem;
+//   cursor: pointer;
+//   position: relative;
+//   box-shadow: 2px 0 0 2px #000, 0 0 0 1px #000, 0 2px 0 2px #000, 0 0 0 1px #000,
+//     inset -4px -4px 0 0 #388e3c;
+
+//   &:hover {
+//     background: #66bb6a;
+//   }
+//   &:active {
+//     box-shadow: 2px 0 0 2px #000, 0 0 0 1px #000, 0 2px 0 2px #000,
+//       0 0 0 1px #000, inset -4px -4px 0 0 #388e3c;
+//   }
+// }
+
+@mixin green-button {
+  font-family: "Rubik", sans-serif;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  padding: 0.625rem 1.25rem;
+  background: #4caf50;
+  color: #ffffff;
+  border: none;
   cursor: pointer;
-  display: inline-block;
-  font-weight: 600;
-  font-size: 18px;
-  padding: 0 18px;
-  line-height: 50px;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
+  position: relative;
+
+  box-shadow: 0 -4px 0 -2px #000, 0 4px 0 -2px #000, -4px 0 0 -2px #000,
+    4px 0 0 -2px #000, inset -4px -4px 0 0 #388e3c;
 
   &:hover {
-    background-color: #fff;
+    background: #66bb6a;
+  }
+
+  &:active {
+    box-shadow: 0 -4px 0 -2px #000, 0 4px 0 -2px #000, -4px 0 0 -2px #000,
+      4px 0 0 -2px #000, inset 4px 4px 0 0 #388e3c;
+  }
+}
+
+@mixin red-button-sm {
+  font-family: "Rubik", sans-serif;
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 0.125rem 0.5rem 0.25rem 0.375rem;
+  background: #ef5350;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 -4px 0 -2px #000, 0 4px 0 -2px #000, -4px 0 0 -2px #000,
+    4px 0 0 -2px #000, inset -2px -2px 0 0 #c62828;
+
+  &:hover {
+    background: #f44336;
   }
   &:active {
-    box-shadow: #422800 2px 2px 0 0;
-    transform: translate(2px, 2px);
+    box-shadow: 1px 0 0 2px #000, 0 0 0 1px #000, 0 1px 0 2px #000,
+      0 0 0 1px #000, inset -2px -2px 0 0 #c62828;
   }
 }

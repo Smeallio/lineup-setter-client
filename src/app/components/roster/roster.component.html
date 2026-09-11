@@ -1,20 +1,22 @@
-<h3>Roster:</h3>
-<ol>
-  @for (player of playerService.players(); track player.id) {
-  <div class="member">
-    <li>
-      <span>{{ player.name }}</span>
-      <button
-        class="playerList__delete-btn"
-        (click)="onDeletePlayer(player.id)"
-        aria-label="Close"
-      >
-        &times;
-      </button>
-    </li>
-  </div>
-  }
-</ol>
+<div class="playerList">
+  <h3 class="playerList__title">Roster:</h3>
+  <ol>
+    @for (player of playerService.players(); track player.id) {
+    <div class="playerList__list-row">
+      <li>
+        <span class="playerList__list-name">{{ player.name }}</span>
+        <button
+          class="playerList__list-delete-btn"
+          (click)="onDeletePlayer(player.id)"
+          aria-label="Close"
+        >
+          &times;
+        </button>
+      </li>
+    </div>
+    }
+  </ol>
+</div>
 @if (showAddPlayer()) {
 <form
   class="addPlayer__form"
@@ -37,13 +39,12 @@
   >
     Add Player
   </button>
-  <button class="addPlayer__form-btn" (click)="toggleAddPlayerForm()">Cancel</button>
+  <button class="addPlayer__form-btn" (click)="toggleAddPlayerForm()">
+    Cancel
+  </button>
 </form>
 } @else {
-  <button
-  class="addPlayer__form-btn"
-  (click)="toggleAddPlayerForm()"
->
+<button class="addPlayer__btn" (click)="toggleAddPlayerForm()">
   Add Player
 </button>
 }
