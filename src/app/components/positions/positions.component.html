@@ -1,0 +1,50 @@
+<div class="positionsList">
+  <h3 class="positionsList__title">Positions:</h3>
+  <ol>
+    @for (position of positionService.positions(); track position.id) {
+    <div class="positionsList__list-row">
+      <li>
+        <span class="positionsList__list-name">{{ position.position }}</span>
+        <button
+          class="positionsList__list-delete-btn"
+          (click)="onDeletePosition(position.id)"
+          aria-label="Close"
+        >
+          &times;
+        </button>
+      </li>
+    </div>
+    }
+  </ol>
+</div>
+@if (showAddPosition()) {
+<form
+  class="addPosition__form"
+  [formGroup]="newPositionForm"
+  (ngSubmit)="onAddPosition()"
+>
+  <div class="addPosition__form-name">
+    <label for="positionName">Position:</label>
+    <input id="positionName" formControlName="positionName" />
+    @if (newPositionForm.get('name')?.invalid &&
+    newPositionForm.get('name')?.touched) {
+    <div>Position name is required.</div>
+    }
+  </div>
+
+  <button
+    class="addPosition__form-btn"
+    type="submit"
+    [disabled]="newPositionForm.invalid"
+  >
+    Add Position
+  </button>
+  <button class="addPosition__form-btn" (click)="toggleAddPositionForm()">
+    Cancel
+  </button>
+</form>
+} @else {
+<button class="addPosition__btn" (click)="toggleAddPositionForm()">
+  Add Position
+</button>
+}

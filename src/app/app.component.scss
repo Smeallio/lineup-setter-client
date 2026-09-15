@@ -1,9 +1,6 @@
-.header__login {
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 2.5rem;
-}
-
-h1 { 
-    font-size: 2.5rem;
+.container {
+    &__roster-position {
+        display: flex;
+        gap: 2.5rem;
+    }
 }
