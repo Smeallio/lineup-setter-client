@@ -1,6 +1,7 @@
 .container {
-    &__roster-position {
-        display: flex;
-        gap: 2.5rem;
-    }
+  &__roster-position {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
 }

@@ -1,10 +1,10 @@
 <header class="app-header">
-  <h1 class="app-header__title">Magic Lineup Setter Tool</h1>
   @if (authService.isLoggedIn()) {
   <button (click)="onLogoutClick()" class="app-header__button">Logout</button>
   } @else {
   <button (click)="onLoginClick()" class="app-header__button">Login</button>
   }
+  <h1 class="app-header__title">Magic Lineup Setter Tool</h1>
 </header>
 
 @if (showLoginDialog()) {
