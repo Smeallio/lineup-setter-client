@@ -12,6 +12,10 @@ export class PositionService {
 
   constructor(private http: HttpClient) {}
 
+  clearPositions() {
+    this.positions.set([]);
+  }
+
   fetchPositions() {
     return this.http.get<Position[]>(`${this.API_URL}/positions`).pipe(
       tap((positions) => {

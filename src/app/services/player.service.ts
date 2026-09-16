@@ -12,6 +12,10 @@ export class PlayerService {
 
   constructor(private http: HttpClient) {}
 
+  clearPlayers() {
+    this.players.set([]);
+  }
+
   fetchPlayers() {
     return this.http.get<Player[]>(`${this.API_URL}/players`).pipe(
       tap((players) => {
