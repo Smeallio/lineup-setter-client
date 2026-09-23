@@ -1,7 +1,7 @@
 export interface PlayerAssignment {
     playerId: string;
     playerName: string;
-    slot: string;
+    position: string;
 }
 
 export interface LineupByInning { 

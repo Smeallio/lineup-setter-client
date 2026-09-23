@@ -41,18 +41,29 @@ export class LineupService {
       }
     }
 
+    const positionOrder = new Map<string, number>(
+      positions.map((pos, index) => [pos.position, index])
+    );
+    const benchSortValue =  positions.length;
+
     const innings: LineupByInning[] = [];
     for (let inning = 1; inning <= numInnings; inning++) {
       const assignments: PlayerAssignment[] = shuffledPlayers.map(
         (player, offset) => {
-          const slot = slotList[(offset + inning - 1) % totalSlots];
+          const position = slotList[(offset + inning - 1) % totalSlots];
           return {
             playerId: player.id,
             playerName: player.name,
-            slot,
+            position,
           };
         }
       );
+
+      assignments.sort((a, b) => {
+        const orderA = positionOrder.get(a.position) ?? benchSortValue;
+        const orderB = positionOrder.get(b.position) ?? benchSortValue;
+        return orderA - orderB;
+      });
 
       innings.push({ inning, assignments });
     }
