@@ -1,7 +1,9 @@
 @use "mixins" as *;
 
 .lineup {
+  text-align: center;
+
   &__btn {
-    @include green-button;
+    @include big-button(#0077B6, #023E8A, #0096C7);
   }
 }

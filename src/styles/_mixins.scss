@@ -1,24 +1,24 @@
-@mixin green-button {
+@mixin big-button($bg-color, $active-color, $hover-color) {
   font-family: "Rubik", sans-serif;
   font-size: 1.25rem;
   text-transform: uppercase;
   padding: 0.625rem 1.25rem;
-  background: #4caf50;
+  background: $bg-color;
   color: #ffffff;
   border: none;
   cursor: pointer;
   position: relative;
 
   box-shadow: 0 -4px 0 -2px #000, 0 4px 0 -2px #000, -4px 0 0 -2px #000,
-    4px 0 0 -2px #000, inset -4px -4px 0 0 #388e3c;
+    4px 0 0 -2px #000, inset -4px -4px 0 0 $active-color;
 
   &:hover {
-    background: #66bb6a;
+    background: $hover-color
   }
 
   &:active {
     box-shadow: 0 -4px 0 -2px #000, 0 4px 0 -2px #000, -4px 0 0 -2px #000,
-      4px 0 0 -2px #000, inset 4px 4px 0 0 #388e3c;
+      4px 0 0 -2px #000, inset 4px 4px 0 0 $active-color;
   }
 }
 

@@ -32,6 +32,6 @@
   }
 
   &__btn {
-    @include green-button;
+    @include big-button(#4caf50, #388e3c, #66bb6a);
   }
 }
