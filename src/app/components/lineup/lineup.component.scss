@@ -2,6 +2,7 @@
 
 .lineup {
   text-align: center;
+  margin-top: 3rem;
 
   &__btn {
     @include big-button(#0077b6, #023e8a, #0096c7);
@@ -10,6 +11,7 @@
 
   &__swiper {
     width: 90vw;
+    max-width: 800px;
     // height: 75vh;
     border: none;
     box-shadow: 0 -8px 0 -4px #000, 0 8px 0 -4px #000, -8px 0 0 -4px #000,

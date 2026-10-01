@@ -24,24 +24,29 @@
   (ngSubmit)="onAddPlayer()"
 >
   <div class="addPlayer__form-name">
-    <label for="playerName">Name:</label>
-    <input id="playerName" formControlName="playerName" />
+    <label class="addPlayer__form-label" for="playerName">Player Name:</label>
+    <input
+      class="addPlayer__form-input"
+      id="playerName"
+      formControlName="playerName"
+    />
     @if (newPlayerForm.get('name')?.invalid &&
     newPlayerForm.get('name')?.touched) {
     <div>Player name is required.</div>
     }
   </div>
-
-  <button
-    class="addPlayer__form-btn"
-    type="submit"
-    [disabled]="newPlayerForm.invalid"
-  >
-    Add Player
-  </button>
-  <button class="addPlayer__form-btn" (click)="toggleAddPlayerForm()">
-    Cancel
-  </button>
+  <div class="addPlayer__form-btns">
+    <button
+      class="addPlayer__form-btn-add"
+      type="submit"
+      [disabled]="newPlayerForm.invalid"
+    >
+      Add Player
+    </button>
+    <button class="addPlayer__form-btn-cancel" (click)="toggleAddPlayerForm()">
+      Cancel
+    </button>
+  </div>
 </form>
 } @else {
 <button class="addPlayer__btn" (click)="toggleAddPlayerForm()">

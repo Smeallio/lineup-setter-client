@@ -24,24 +24,32 @@
   (ngSubmit)="onAddPosition()"
 >
   <div class="addPosition__form-name">
-    <label for="positionName">Position:</label>
-    <input id="positionName" formControlName="positionName" />
+    <label class="addPosition__form-label" for="positionName">Position:</label>
+    <input
+      class="addPosition__form-input"
+      id="positionName"
+      formControlName="positionName"
+    />
     @if (newPositionForm.get('name')?.invalid &&
     newPositionForm.get('name')?.touched) {
     <div>Position name is required.</div>
     }
   </div>
-
-  <button
-    class="addPosition__form-btn"
-    type="submit"
-    [disabled]="newPositionForm.invalid"
-  >
-    Add Position
-  </button>
-  <button class="addPosition__form-btn" (click)="toggleAddPositionForm()">
-    Cancel
-  </button>
+  <div class="addPosition__form-btns">
+    <button
+      class="addPosition__form-btn-add"
+      type="submit"
+      [disabled]="newPositionForm.invalid"
+    >
+      Add Position
+    </button>
+    <button
+      class="addPosition__form-btn-cancel"
+      (click)="toggleAddPositionForm()"
+    >
+      Cancel
+    </button>
+  </div>
 </form>
 } @else {
 <button class="addPosition__btn" (click)="toggleAddPositionForm()">

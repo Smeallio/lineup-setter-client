@@ -3,6 +3,11 @@
 .playerList {
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
+
+  @media (min-width: 550px) {
+    width: 500px;
+  }
+
   &__title {
     font-size: 2rem;
     margin: 1rem 0 0;
@@ -30,6 +35,42 @@
 .addPlayer {
   &__form {
     display: flex;
+    flex-direction: column;
+    max-width: 500px;
+
+    &-name {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      // margin-bottom: 1.5rem;
+    }
+
+    &-label {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    &-input {
+      @include input-field;
+      flex: 1 1 0;
+      min-width: 0;
+    }
+
+    &-btns {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    &-btn-add {
+      @include small-button(#4caf50, #388e3c, #66bb6a);
+    }
+
+    &-btn-cancel {
+      @include small-button(#ef5350, #c62828, #f44336);
+    }
   }
 
   &__btn {
