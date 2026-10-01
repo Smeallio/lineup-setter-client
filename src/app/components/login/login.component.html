@@ -16,8 +16,8 @@
     }
     <form class="login-dialog__form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="login-dialog__form-user" >
-        <label for="username">Username:</label>
-        <input id="username" formControlName="username" />
+        <label class="login-dialog__form-label" for="username">Username:</label>
+        <input class="login-dialog__form-input" id="username" formControlName="username" />
         @if (loginForm.get('username')?.invalid &&
         loginForm.get('username')?.touched) {
         <div>Username is required.</div>
@@ -25,8 +25,8 @@
       </div>
 
       <div class="login-dialog__form-password" >
-        <label for="password">Password:</label>
-        <input id="password" type="password" formControlName="password" />
+        <label class="login-dialog__form-label" for="password">Password:</label>
+        <input class="login-dialog__form-input" id="password" type="password" formControlName="password" />
         @if (loginForm.get('password')?.invalid &&
         loginForm.get('password')?.touched) {
         <div>Password is required.</div>

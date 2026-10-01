@@ -10,7 +10,7 @@
 
   &__swiper {
     width: 90vw;
-    height: 75vh;
+    // height: 75vh;
     border: none;
     box-shadow: 0 -8px 0 -4px #000, 0 8px 0 -4px #000, -8px 0 0 -4px #000,
     8px 0 0 -4px #000;
@@ -33,7 +33,7 @@
 
     &-assignments {
       list-style: none;
-      padding: 0;
+      padding: 0 0 2rem;
       width: 100%;
     }
 
@@ -46,6 +46,12 @@
 
     &-position {
       font-weight: bold;
+      text-align: left;
+      margin-right: 2rem;
+    }
+
+    &-player {
+      text-align: right;
     }
   }
 }

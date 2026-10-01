@@ -1,3 +1,5 @@
+@use "mixins" as *;
+
 .login-dialog {
   &__backdrop {
     position: fixed;
@@ -13,32 +15,46 @@
     position: relative;
     background-color: white;
     border-radius: 0.5rem;
-    width: 400px;
+    width: 80vw;
+    max-width: 400px;
+    padding: 1.5rem;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
 
     &-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 1rem;
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
     }
 
     &-title {
-      font-size: 1.5rem;
+      font-size: 1.75rem;
       font-weight: bold;
+      margin: 0;
     }
 
     &-close-btn {
-      cursor: pointer;
+      @include small-button(#ef5350, #c62828, #f44336);
     }
   }
 
   &__form {
-    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 
-    &-user, &-password, &-btn {
-        margin: 1rem 0;
+    &-label {
+      font-size: 1.25rem;
+      margin-right: 1rem;
+    }
+
+    &-input {
+      @include input-field;
+    }
+
+    &-btn {
+      @include big-button(#4caf50, #388e3c, #66bb6a);
+      align-self: flex-end;
     }
   }
 }
