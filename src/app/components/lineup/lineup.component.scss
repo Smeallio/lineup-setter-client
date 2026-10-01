@@ -4,6 +4,48 @@
   text-align: center;
 
   &__btn {
-    @include big-button(#0077B6, #023E8A, #0096C7);
+    @include big-button(#0077b6, #023e8a, #0096c7);
+    margin-bottom: 2rem;
+  }
+
+  &__swiper {
+    width: 90vw;
+    height: 75vh;
+    border: none;
+    box-shadow: 0 -8px 0 -4px #000, 0 8px 0 -4px #000, -8px 0 0 -4px #000,
+    8px 0 0 -4px #000;
+    --swiper-navigation-size: 1.75rem;
+
+    &-slide {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0 3rem;
+      background: white;
+    }
+
+    &-title {
+      font-size: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    &-assignments {
+      list-style: none;
+      padding: 0;
+      width: 100%;
+    }
+
+    &-assignment {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 1rem;
+      border-bottom: 1px solid #ddd;
+    }
+
+    &-position {
+      font-weight: bold;
+    }
   }
 }

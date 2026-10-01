@@ -1,3 +1,25 @@
 <div class="lineup">
   <button class="lineup__btn" (click)="onGenerateLineup()">Make Lineup</button>
+  @if (lineupService.lineup(); as lineup) {
+  <swiper-container
+    class="lineup__swiper"
+    pagination="true"
+    keyboard="true"
+    navigation="true"
+  >
+    @for (inning of lineup.innings; track inning.inning) {
+    <swiper-slide class="lineup__swiper-slide">
+      <h3 class="lineup__swiper-title">Inning #{{ inning.inning }}</h3>
+      <ul class="lineup__swiper-assignments">
+        @for (assignment of inning.assignments; track assignment.playerId) {
+        <li class="lineup__swiper-assignment">
+          <span class="lineup__swiper-position">{{ assignment.position }}: </span>
+          <span class="lineup__swiper-player">{{ assignment.playerName }}</span>
+        </li>
+        }
+      </ul>
+    </swiper-slide>
+    }
+  </swiper-container>
+  }
 </div>
