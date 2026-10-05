@@ -14,6 +14,16 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
+  signup(name: string, email: string, password: string) {
+    return this.http
+      .post<LoginResponse>(`${this.API_URL}/managers/`, {
+        name,
+        email,
+        password,
+      })
+      .pipe(tap((res) => this.setSession(res.token)));
+  }
+
   login(email: string, password: string) {
     return this.http
       .post<LoginResponse>(`${this.API_URL}/managers/login`, {

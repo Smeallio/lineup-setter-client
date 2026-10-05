@@ -1,0 +1,49 @@
+<div class="signup-dialog__backdrop" (click)="onClose()">
+    <div class="signup-dialog__modal" (click)="$event.stopPropagation()">
+      <div class="signup-dialog__modal-header">
+        <h2 class="signup-dialog__modal-title">Sign Up</h2>
+        <button
+          class="signup-dialog__modal-close-btn"
+          (click)="onClose()"
+          aria-label="Close"
+        >
+          &times;
+        </button>
+      </div>
+  
+      @if (errorMessage) {
+      <p>{{ errorMessage }}</p>
+      }
+      <form class="signup-dialog__form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <div class="signup-dialog__form-name" >
+          <label class="signup-dialog__form-label" for="name">Name:</label>
+          <input class="signup-dialog__form-input" id="email" formControlName="name" />
+          @if (signupForm.get('name')?.invalid &&
+          signupForm.get('name')?.touched) {
+          <div>Name is required.</div>
+          }
+        </div>
+
+        <div class="signup-dialog__form-email" >
+            <label class="signup-dialog__form-label" for="email">Email:</label>
+            <input class="signup-dialog__form-input" id="email" formControlName="email" />
+            @if (signupForm.get('email')?.invalid &&
+            signupForm.get('email')?.touched) {
+            <div>Email is required.</div>
+            }
+          </div>
+  
+        <div class="signup-dialog__form-password" >
+          <label class="signup-dialog__form-label" for="password">Password:</label>
+          <input class="signup-dialog__form-input" id="password" type="password" formControlName="password" />
+          @if (signupForm.get('password')?.invalid &&
+          signupForm.get('password')?.touched) {
+          <div>Password is required.</div>
+          }
+        </div>
+  
+        <button class="signup-dialog__form-btn"  type="submit" [disabled]="signupForm.invalid">Sign Up</button>
+      </form>
+    </div>
+  </div>
+  

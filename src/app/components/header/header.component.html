@@ -2,12 +2,22 @@
   @if (authService.isLoggedIn()) {
   <button (click)="onLogoutClick()" class="app-header__button">Logout</button>
   } @else {
-  <button (click)="onLoginClick()" class="app-header__button">Login</button>
+  <div class="app-header__buttons">
+    <button (click)="onSignUpClick()" class="app-header__button">
+      Sign Up
+    </button>
+    <button (click)="onLoginClick()" class="app-header__button">Login</button>
+  </div>
   }
   <h1 class="app-header__title">Magic Lineup Setter Tool</h1>
 </header>
 
-@if (showLoginDialog()) {
+@if (showSignUpDialog()) {
+<app-signup-dialog
+  (signUpSuccess)="onDialogClosed()"
+  (closeSignUp)="onDialogClosed()"
+></app-signup-dialog>
+} @if (showLoginDialog()) {
 <app-login-dialog
   (loginSuccess)="onDialogClosed()"
   (closeLogin)="onDialogClosed()"

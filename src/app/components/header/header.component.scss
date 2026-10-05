@@ -3,9 +3,19 @@
 .app-header {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   padding: 1rem 0;
+
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+    width: 90%;
+    gap: 1rem;
+  }
+
+  &__button {
+    @include small-button(#0077B6, #023E8A, #0096C7);
+  }
 
   &__title {
     font-size: 2.5rem;
@@ -13,7 +23,5 @@
     margin: 1.5rem 0 0;
   }
 
-  &__button {
-    @include big-button(#0077B6, #023E8A, #0096C7);
-  }
+
 }
