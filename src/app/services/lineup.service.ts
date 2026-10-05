@@ -44,7 +44,7 @@ export class LineupService {
     const positionOrder = new Map<string, number>(
       positions.map((pos, index) => [pos.position, index])
     );
-    const benchSortValue =  positions.length;
+    const benchSortValue = positions.length;
 
     const innings: LineupByInning[] = [];
     for (let inning = 1; inning <= numInnings; inning++) {
@@ -92,6 +92,14 @@ export class LineupService {
   private loadLineupFromStorage(): FullLineup | null {
     const savedLineup = localStorage.getItem(STORAGE_KEY);
     return savedLineup ? JSON.parse(savedLineup) : null;
+  }
+
+  public restoreLineupFromStorage(): void {
+    this.lineup.set(this.loadLineupFromStorage());
+  }
+
+  clearLineupFromPage(): void {
+    this.lineup.set(null);
   }
 
   // Fisher-Yates shuffle algorithm to randomize the order of players and positions
