@@ -1,0 +1,25 @@
+<div class="confirm-dialog__backdrop" (click)="cancelled.emit()">
+  <div
+    class="confirm-dialog__modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="confirm-dialog-title"
+    (click)="$event.stopPropagation()"
+  >
+    <p class="confirm-dialog__modal-message">{{ message }}</p>
+    <div class="confirm-dialog__modal-actions">
+      <button
+        class="confirm-dialog__modal-btn confirm-dialog__modal-btn--confirm"
+        (click)="confirmed.emit()"
+      >
+        Yes
+      </button>
+      <button
+        class="confirm-dialog__modal-btn confirm-dialog__modal-btn--cancel"
+        (click)="cancelled.emit()"
+      >
+        No
+      </button>
+    </div>
+  </div>
+</div>
