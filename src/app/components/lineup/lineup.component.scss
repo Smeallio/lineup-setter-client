@@ -6,16 +6,20 @@
 
   &__btn {
     @include big-button(#0077b6, #023e8a, #0096c7);
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  &__btn-clear {
+    @include big-button(#ef5350, #c62828, #f44336);
+    margin: 3rem 0;
   }
 
   &__swiper {
     width: 90vw;
     max-width: 800px;
-    // height: 75vh;
     border: none;
     box-shadow: 0 -8px 0 -4px #000, 0 8px 0 -4px #000, -8px 0 0 -4px #000,
-    8px 0 0 -4px #000;
+      8px 0 0 -4px #000;
     --swiper-navigation-size: 1.75rem;
 
     &-slide {

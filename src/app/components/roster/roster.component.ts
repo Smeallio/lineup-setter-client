@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { PlayerService } from '../../services/player.service';
+import { ConfirmService } from '../../services/confirm.service';
 
 @Component({
   selector: 'app-roster',
@@ -15,7 +16,10 @@ import { PlayerService } from '../../services/player.service';
   styleUrl: './roster.component.scss',
 })
 export class RosterComponent implements OnInit {
-  constructor(public playerService: PlayerService) {}
+  constructor(
+    public playerService: PlayerService,
+    private confirmService: ConfirmService
+  ) {}
 
   ngOnInit(): void {
     this.playerService.fetchPlayers().subscribe();
@@ -41,9 +45,12 @@ export class RosterComponent implements OnInit {
     }
   }
 
-  onDeletePlayer(playerId: string): void {
+  async onDeletePlayer(playerId: string): Promise<void> {
+    const confirmed = await this.confirmService.ask(
+      'Are you sure you want to remove this player?'
+    );
+    if (!confirmed) return;
     this.playerService.deletePlayer(playerId).subscribe({
-      next: () => console.log(`Player with ID ${playerId} deleted.`),
       error: (err) => console.error('Error deleting player:', err),
     });
   }

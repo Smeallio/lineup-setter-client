@@ -6,3 +6,11 @@
   </div>
   <app-lineup></app-lineup>
 </div>
+
+@if (confirmService.request(); as req) {
+<app-confirm
+  [message]="req.message"
+  (confirmed)="confirmService.respond(true)"
+  (cancelled)="confirmService.respond(false)"
+/>
+}

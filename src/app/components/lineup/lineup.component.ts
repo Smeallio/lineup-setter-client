@@ -43,4 +43,8 @@ export class LineupComponent implements OnInit {
       );
     }
   }
+
+  onClearLineup(): void {
+    this.lineupService.clearLineup();
+  }
 }

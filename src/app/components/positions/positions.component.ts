@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { PositionService } from '../../services/positions.service';
+import { ConfirmService } from '../../services/confirm.service';
 
 @Component({
   selector: 'app-positions',
@@ -15,7 +16,10 @@ import { PositionService } from '../../services/positions.service';
   styleUrl: './positions.component.scss',
 })
 export class PositionComponent implements OnInit {
-  constructor(public positionService: PositionService) {}
+  constructor(
+    public positionService: PositionService,
+    private confirmService: ConfirmService
+  ) {}
 
   ngOnInit(): void {
     this.positionService.fetchPositions().subscribe();
@@ -41,9 +45,12 @@ export class PositionComponent implements OnInit {
     }
   }
 
-  onDeletePosition(positionId: string): void {
+  async onDeletePosition(positionId: string): Promise<void> {
+    const confirmed = await this.confirmService.ask(
+      'Are you sure you want to remove this position?'
+    );
+    if (!confirmed) return;
     this.positionService.deletePosition(positionId).subscribe({
-      next: () => console.log(`Position with ID ${positionId} deleted.`),
       error: (err) => console.error('Error deleting position:', err),
     });
   }
