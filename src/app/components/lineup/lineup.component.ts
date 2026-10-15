@@ -3,6 +3,7 @@ import { register } from 'swiper/element/bundle';
 import { PlayerService } from '../../services/player.service';
 import { PositionService } from '../../services/positions.service';
 import { LineupService } from '../../services/lineup.service';
+import { ConfirmService } from '../../services/confirm.service';
 
 @Component({
   selector: 'app-lineup',
@@ -16,7 +17,8 @@ export class LineupComponent implements OnInit {
   constructor(
     public playerService: PlayerService,
     public positionService: PositionService,
-    public lineupService: LineupService
+    public lineupService: LineupService,
+    private confirmService: ConfirmService
   ) {}
 
   ngOnInit(): void {
@@ -44,7 +46,11 @@ export class LineupComponent implements OnInit {
     }
   }
 
-  onClearLineup(): void {
+  async onClearLineup(): Promise<void> {
+    const confirmed = await this.confirmService.ask(
+      'Are you sure you want to clear this lineup?'
+    );
+    if (!confirmed) return;
     this.lineupService.clearLineup();
   }
 }
