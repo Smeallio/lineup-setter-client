@@ -1,10 +1,18 @@
 <div class="container">
   <app-header></app-header>
+  @if (authService.isLoggedIn()) {
   <div class="container__roster-position">
     <app-roster></app-roster>
     <app-positions></app-positions>
   </div>
   <app-lineup></app-lineup>
+  } @else { @if (authService.sessionExpired()) {
+  <p class="container__login-message">
+    Your session has expired. Please log back in.
+  </p>
+  } @else {
+  <p class="container__login-message">Please login or sign up to continue.</p>
+  } }
 </div>
 
 @if (confirmService.request(); as req) {
