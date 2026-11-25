@@ -2,7 +2,7 @@
   <button class="lineup__btn" (click)="onGenerateLineup()">
     Create New Lineup
   </button>
- @if (lineupService.lineup(); as lineup) {
+  @if (lineupService.lineup(); as lineup) {
   <swiper-container
     class="lineup__swiper"
     pagination="true"
@@ -16,7 +16,10 @@
         @for (assignment of inning.assignments; track assignment.playerId) {
         <li class="lineup__swiper-assignment">
           <span class="lineup__swiper-position"
-            >{{ assignment.position }}:
+            >{{ assignment.position }} @if ( assignment.field === "bench"
+            ) {} @else { [{{
+              assignment.field === "infield" ? "INF" : "OF"
+            }}] }
           </span>
           <span class="lineup__swiper-player">{{ assignment.playerName }}</span>
         </li>

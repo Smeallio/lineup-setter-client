@@ -3,6 +3,7 @@ import { Player } from './../models/player.interface';
 import { Position } from './../models/position.interface';
 import {
   PlayerAssignment,
+  Slot,
   LineupByInning,
   FullLineup,
 } from './../models/lineup.interface';
@@ -25,21 +26,8 @@ export class LineupService {
 
     const totalSlots = players.length;
     const benchCount = totalSlots - positions.length;
-
     const shuffledPlayers = this.shuffle(players);
-    const shuffledPositions = this.shuffle(positions);
-    const benchIndices = this.evenlyDistubtedBenchSpots(totalSlots, benchCount);
-
-    const slotList: string[] = new Array(totalSlots);
-    let positionCursor = 0;
-    for (let i = 0; i < totalSlots; i++) {
-      if (benchIndices.has(i)) {
-        slotList[i] = BENCH_LABEL;
-      } else {
-        slotList[i] = shuffledPositions[positionCursor].position;
-        positionCursor++;
-      }
-    }
+    const slotList = this.buildSlotList(positions, benchCount);
 
     const positionOrder = new Map<string, number>(
       positions.map((pos, index) => [pos.position, index])
@@ -50,11 +38,12 @@ export class LineupService {
     for (let inning = 1; inning <= numInnings; inning++) {
       const assignments: PlayerAssignment[] = shuffledPlayers.map(
         (player, offset) => {
-          const position = slotList[(offset + inning - 1) % totalSlots];
+          const slot = slotList[(offset + inning - 1) % totalSlots];
           return {
             playerId: player.id,
             playerName: player.name,
-            position,
+            position: slot.position,
+            field: slot.field,
           };
         }
       );
@@ -112,14 +101,40 @@ export class LineupService {
     return shuffled;
   }
 
-  // Distibute bench spots evenly through the positions array that players are assigned against
-  private evenlyDistubtedBenchSpots(total: number, count: number): Set<number> {
-    const indices = new Set<number>();
-    if (count <= 0) return indices;
-    for (let i = 0; i < count; i++) {
-      const index = Math.floor((i * total) / count);
-      indices.add(index);
+  private buildSlotList(positions: Position[], benchCount: number): Slot[] {
+    const infield: Slot[] = this.shuffle(
+      positions.filter((p) => p.field === 'infield')
+    ).map((p) => ({ position: p.position, field: 'infield' }));
+
+    const outfield: Slot[] = this.shuffle(
+      positions.filter((p) => p.field === 'outfield')
+    ).map((p) => ({ position: p.position, field: 'outfield' }));
+
+    const bench: Slot[] = Array.from({ length: benchCount }, () => ({
+      position: BENCH_LABEL,
+      field: 'bench',
+    }));
+
+    const groups = [infield, outfield, bench]
+      .filter((group) => group.length > 0)
+      .sort((a, b) => a.length - b.length);
+
+    const total = positions.length + benchCount;
+    const slots: (Slot | undefined)[] = new Array(total);
+
+    for (const group of groups) {
+      const openIndices: number[] = [];
+      for (let i = 0; i < total; i++) {
+        if (!slots[i]) {
+          openIndices.push(i);
+        }
+      }
+      group.forEach((slot, index) => {
+        const targetIndex =
+          openIndices[Math.floor((index * openIndices.length) / group.length)];
+        slots[targetIndex] = slot;
+      });
     }
-    return indices;
+    return slots as Slot[];
   }
 }
