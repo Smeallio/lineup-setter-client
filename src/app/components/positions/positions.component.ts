@@ -32,16 +32,25 @@ export class PositionComponent implements OnInit {
   }
 
   newPositionForm = new FormGroup({
-    positionName: new FormControl('', Validators.required),
+    positionName: new FormControl('', {
+      nonNullable: true,
+      validators: Validators.required,
+    }),
+    positionField: new FormControl<'infield' | 'outfield'>('infield', {
+      nonNullable: true,
+      validators: Validators.required,
+    }),
   });
 
   onAddPosition(): void {
     if (this.newPositionForm.valid) {
-      const { positionName } = this.newPositionForm.value;
-      this.positionService.addPosition({ position: positionName! }).subscribe({
-        next: () => this.newPositionForm.reset(),
-        error: (err) => console.error('Error adding position:', err),
-      });
+      const { positionName, positionField } = this.newPositionForm.value;
+      this.positionService
+        .addPosition({ position: positionName!, field: positionField! })
+        .subscribe({
+          next: () => this.newPositionForm.reset(),
+          error: (err) => console.error('Error adding position:', err),
+        });
     }
   }
 

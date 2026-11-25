@@ -5,6 +5,9 @@
     <div class="positionsList__list-row">
       <li>
         <span class="positionsList__list-name">{{ position.position }}</span>
+        <span class="positionsList__list-field">
+          [{{ position.field === "infield" ? "INF" : "OF" }}]
+        </span>
         <button
           class="positionsList__list-delete-btn"
           (click)="onDeletePosition(position.id)"
@@ -23,18 +26,31 @@
   [formGroup]="newPositionForm"
   (ngSubmit)="onAddPosition()"
 >
-  <div class="addPosition__form-name">
+  <div class="addPosition__form-fields">
+    <div>
     <label class="addPosition__form-label" for="positionName">Position:</label>
     <input
       class="addPosition__form-input"
       id="positionName"
       formControlName="positionName"
     />
-    @if (newPositionForm.get('name')?.invalid &&
-    newPositionForm.get('name')?.touched) {
+    @if (newPositionForm.get('positionName')?.invalid &&
+    newPositionForm.get('positionName')?.touched) {
     <div>Position name is required.</div>
     }
   </div>
+  <div>
+    <label class="addPosition__form-label" for="positionField">Field:</label>
+    <select
+      class="addPosition__form-input"
+      id="positionField"
+      formControlName="positionField"
+    >
+      <option value="infield">Infield</option>
+      <option value="outfield">Outfield</option>
+    </select>
+  </div>
+</div>
   <div class="addPosition__form-btns">
     <button
       class="addPosition__form-btn-add"
